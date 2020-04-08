@@ -6,11 +6,12 @@ import (
 )
 
 /**
-*this is a class that set up the Api address to consume "http://localhost:9099/bookstore/"
+*this is a class that set up the Api address to consume "http://localhost:9099/sts/"
 * Port: 9099 domain: bookstore
 *It also set the type of messaging protocol in our case we will be using JSON
 **/
-const BASE_URL string = "http://localhost:9099/bookstore/"
+
+const BASE_URL string = "http://localhost:9099/sts/"
 
 func Rest() *resty.Request {
 	return resty.R().SetAuthToken("").
