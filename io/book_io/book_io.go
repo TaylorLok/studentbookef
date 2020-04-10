@@ -46,7 +46,7 @@ func ReadBooks() ([]domain.Book, error) {
 }
 func DeleteBook(mybook domain.Book) (domain.Book, error) {
 	entity := domain.Book{}
-	resp, _ := api.Rest().SetBody(mybook).Post(bookURL + "detele")
+	resp, _ := api.Rest().SetBody(mybook).Post(bookURL + "delete")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}

@@ -21,13 +21,13 @@ We Testing the create method
 BOOK IMAGE TEST START HERE
 */
 func TestCreatBookImage(t *testing.T) {
-	bImage := domain.BookImage{"000", "0000", "test"}
+	bImage := domain.BookImage{"0001", "0000", "test2"}
 	result, err := CreatBookImage(bImage)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestReadBookImage(t *testing.T) {
-	result, err := ReadBookImage("")
+	result, err := ReadBookImage("000")
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
@@ -37,13 +37,13 @@ func TestReadBookImages(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestUpdateBookImage(t *testing.T) {
-	bImage := domain.BookImage{"000", "0000", "test"}
+	bImage := domain.BookImage{"000", "00034", "test"}
 	result, err := UpdateBookImage(bImage)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestDeleteBookImage(t *testing.T) {
-	bImage := domain.BookImage{"000", "0000", "test"}
+	bImage := domain.BookImage{"0001", "0000", "test2"}
 	result, err := DeleteBookImage(bImage)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
@@ -63,7 +63,7 @@ func TestCreateBook(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestReadBook(t *testing.T) {
-	result, err := ReadBook("")
+	result, err := ReadBook("BF-09801845-2d3c-4bed-8b43-0e443ad12ad0")
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
@@ -73,13 +73,13 @@ func TestReadBooks(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestDeleteBook(t *testing.T) {
-	book := domain.Book{"0000", "biblia", "ENglish", "VI", 300}
+	book := domain.Book{"BF-ea6a377d-e513-46c2-b4bf-8ab781d4ad41", "biblia", "ENglish", "VI", 300}
 	result, err := DeleteBook(book)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestUpdateBook(t *testing.T) {
-	book := domain.Book{"0000", "biblia", "ENglish", "VI", 300}
+	book := domain.Book{"BF-ac451ff2-db92-4a3a-a4ea-f5912554f377", "biblia", "French", "VI", 300}
 	result, err := UpdateBook(book)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
@@ -99,19 +99,19 @@ func TestCreateBookdepartment(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestDeleteBookDepartment(t *testing.T) {
-	bookDeparment := domain.BookDepartment{"0000", "00000", "test"}
+	bookDeparment := domain.BookDepartment{"0000", "000003232", "test"}
 	result, err := DeleteBookDepartment(bookDeparment)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestUpdateBookDepartment(t *testing.T) {
-	bookDeparment := domain.BookDepartment{"0000", "00000", "test"}
+	bookDeparment := domain.BookDepartment{"0000", "000003232", "test"}
 	result, err := UpdateBookDepartment(bookDeparment)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestReadBookDepartment(t *testing.T) {
-	result, err := ReadBookDepartment("")
+	result, err := ReadBookDepartment("0000")
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
@@ -129,13 +129,13 @@ BOOKDEPARTMENT TEST ENDS HERE
 BOOKPOST TEST START HERE
 */
 func TestCreatBookPost(t *testing.T) {
-	post := domain.BookPost{"000", "espoirditekemena@gmail.com", "0000", time.Now(), "00034", "on", "all the page od thid book are in good sharp"}
+	post := domain.BookPost{"0001", "espoirditekemena@gmail.com", "0000", time.Now(), "00034", "on", "all the page od thid book are in good sharp"}
 	result, err := CreatBookPost(post)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestUpdateBookPost(t *testing.T) {
-	post := domain.BookPost{"000", "espoirditekemena@gmail.com", "0000", time.Now(), "00034", "on", "all the page od thid book are in good sharp"}
+	post := domain.BookPost{"BPF-5c7634f6-4d6f-43a4-98d6-8b27100da3c8", "216093805@mycut.ac.za", "0000", time.Now(), "00034", "on", "all the page od thid book are in good sharp"}
 	result, err := UpdateBookPost(post)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
@@ -146,13 +146,13 @@ func TestReadBookPosts(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestDeleteBookPost(t *testing.T) {
-	post := domain.BookPost{"000", "espoirditekemena@gmail.com", "0000", time.Now(), "00034", "on", "all the page od thid book are in good sharp"}
+	post := domain.BookPost{"BPF-5c7634f6-4d6f-43a4-98d6-8b27100da3c8", "espoirditekemena@gmail.com", "0000", time.Now(), "00034", "on", "all the page od thid book are in good sharp"}
 	result, err := DeleteBookPost(post)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestReadBookPost(t *testing.T) {
-	result, err := ReadBookPost("")
+	result, err := ReadBookPost("BPF-5c7634f6-4d6f-43a4-98d6-8b27100da3c8")
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }

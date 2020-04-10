@@ -16,8 +16,8 @@ type BookDepartment struct {
 	Description  string `json:"description"`
 }
 type BookImage struct {
-	BookId      string `json:"book_Id"`
-	ImageId     string `json:"image_Id"`
+	BookId      string `json:"book_id"`
+	ImageId     string `json:"image_id"`
 	Description string `json:"description"`
 }
 type BookPost struct {
