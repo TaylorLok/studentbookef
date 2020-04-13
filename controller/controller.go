@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"studentbookef/config"
 	"studentbookef/controller/home"
+	"studentbookef/controller/user"
 )
 
 func Controllers(env *config.Env) http.Handler {
@@ -20,7 +21,8 @@ func Controllers(env *config.Env) http.Handler {
 	mux.Use(middleware.Logger)
 	mux.Use(env.Session.LoadAndSave)
 
-	mux.Handle("/", home.Home(env))
+	mux.Mount("/", home.Home(env))
+	mux.Mount("/user", user.User(env))
 	//mux.Handle("/homeError", controllers.Home(env))
 	//mux.Mount("/category", item.Home(env))
 	//mux.Mount("/customer", customer.Customer(env))

@@ -3,7 +3,7 @@ module studentbookef
 go 1.13
 
 require (
-	github.com/alexedwards/scs v1.4.1
+	//github.com/alexedwards/scs v1.4.1
 	github.com/alexedwards/scs/v2 v2.2.0
 	github.com/go-chi/chi v4.1.0+incompatible
 	github.com/json-iterator/go v1.1.9
