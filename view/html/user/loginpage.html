@@ -7,7 +7,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" href="assets/img/favicon.png" type="image/png"/>
+    <link rel="icon" href="../../assets/img/fevicon.png" type="image/png"/>
     <title>OKVS</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../../assets/css/bootstrap.css"/>
@@ -28,28 +28,7 @@
   <body>
     <!--================Header Menu Area =================-->
     {{template "navigator" .}}
-    <!--================Header Menu Area =================-->
 
-    <!--================Home Banner Area =================
-    <section class="banner_area">
-      <div class="banner_inner d-flex align-items-center">
-        <div class="container">
-          <div
-            class="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div class="mb-3 mb-md-0">
-              <h2>Contact Us</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div class="page_link">
-              <a href="index.html">Home</a>
-              <a href="contact.html">Contact Us</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>-->
-    <!--================End Home Banner Area =================-->
 
     <!-- ================ contact section start ================= -->
 
@@ -59,7 +38,7 @@
           <div class="card card-signin my-5">
             <div class="card-body">
               <h5 class="card-title text-center">Sign In</h5>
-              <form class="form-signin" method="post" action="/user/customer/log">
+              <form class="form-signin" method="post" action="/user/loginpost">
                 <div class="form-label-group">
                   <input type="email" id="inputEmail" name="email"  class="form-control" placeholder="Email address" required autofocus>
                   <label for="inputEmail">Email address</label>
@@ -76,8 +55,9 @@
                 </div>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
                 <hr class="my-4">
-                <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-                <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                  <p class="text-center">If you dont have An account yet, you can create one in a minute</p>
+
+                  <a href="/user/signup" class=" btn btn-lg info btn-block">Info</a>
               </form>
             </div>
           </div>
@@ -85,66 +65,7 @@
       </div>
 
 
-       <!--<div class="row">
-         <div class="col-12">
-           <h2 class="contact-title">Get in Touch</h2>
-         </div>
-         <div class="col-lg-8 mb-4 mb-lg-0">
-           <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-             <div class="row">
-               <div class="col-12">
-                 <div class="form-group">
-                     <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Enter Message"></textarea>
-                 </div>
-               </div>
-               <div class="col-sm-6">
-                 <div class="form-group">
-                   <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name">
-                 </div>
-               </div>
-               <div class="col-sm-6">
-                 <div class="form-group">
-                   <input class="form-control" name="email" id="email" type="email" placeholder="Enter email address">
-                 </div>
-               </div>
-               <div class="col-12">
-                 <div class="form-group">
-                   <input class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject">
-                 </div>
-               </div>
-             </div>
-             <div class="form-group mt-lg-3">
-               <button type="submit" class="main_btn">Send Message</button>
-             </div>
-           </form>
 
-
-         </div>
-
-         <div class="col-lg-4">
-           <div class="media contact-info">
-             <span class="contact-info__icon"><i class="ti-home"></i></span>
-             <div class="media-body">
-               <h3>Buttonwood, California.</h3>
-               <p>Rosemead, CA 91770</p>
-             </div>
-           </div>
-           <div class="media contact-info">
-             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-             <div class="media-body">
-               <h3><a href="tel:454545654">00 (440) 9865 562</a></h3>
-               <p>Mon to Fri 9am to 6pm</p>
-             </div>
-           </div>
-           <div class="media contact-info">
-             <span class="contact-info__icon"><i class="ti-email"></i></span>
-             <div class="media-body">
-               <h3><a href="mailto:support@colorlib.com">support@colorlib.com</a></h3>
-               <p>Send us your query anytime!</p>
-             </div>
-           </div>
-         </div>
-       </div>-->
      </div>
 
      <!-- ================ contact section end ================= -->

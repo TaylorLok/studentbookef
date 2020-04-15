@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"net/http"
 	"studentbookef/config"
+	"studentbookef/controller/book"
 	"studentbookef/controller/home"
 	"studentbookef/controller/user"
 )
@@ -23,6 +24,7 @@ func Controllers(env *config.Env) http.Handler {
 
 	mux.Mount("/", home.Home(env))
 	mux.Mount("/user", user.User(env))
+	mux.Mount("/book", book.Book(env))
 	//mux.Handle("/homeError", controllers.Home(env))
 	//mux.Mount("/category", item.Home(env))
 	//mux.Mount("/customer", customer.Customer(env))

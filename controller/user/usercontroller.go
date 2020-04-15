@@ -15,7 +15,7 @@ func User(app *config.Env) http.Handler {
 	r := chi.NewRouter()
 	r.Get("/", homeHandler(app))
 	r.Get("/login", logInHandler(app))
-	r.Post("/login", LoginHandler(app))
+	r.Post("/loginpost", LoginPostHandler(app))
 	r.Get("/signup", SignUpHandler(app))
 	r.Post("/register", RegisterHandler(app)) //this method receives signUp form
 	return r
@@ -37,6 +37,15 @@ func GetMessage(Type string) Message {
 	case "just_login":
 		text := "Welcome back"
 		return Message{text, "info"}
+	case "login_error":
+		text := "An error has occurred, Please try again with correct details"
+		return Message{text, "warning"}
+	case "post_error":
+		text := "An error has occurred, Please try again later"
+		return Message{text, "warning"}
+	case "post_error_need_to_signup":
+		text := "An error has occurred, Please try to sign in first and again later"
+		return Message{text, "warning"}
 	}
 	return Message{}
 }
@@ -48,7 +57,7 @@ we then create a user with only email and name other attributs will remain empty
 if an error occurs we will redirect the url address to /user/signup. this Url will return a sign up page on user's interface with a proper error Message
 But if there no errors, we will direct the user on home page with a notification Message for him/her to check the email to confirm registration.
 */
-func LoginHandler(app *config.Env) http.HandlerFunc {
+func LoginPostHandler(app *config.Env) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		myuser := domain.UserAccount{}
 		r.ParseForm()
@@ -56,13 +65,29 @@ func LoginHandler(app *config.Env) http.HandlerFunc {
 		email := r.PostFormValue("email")
 		if password != "" || email != "" {
 			myuser = domain.UserAccount{email, password, "", time.Now()}
+			fmt.Println(myuser)
 			result, err := user.UserLog(myuser)
-			if err != nil {
+			fmt.Println(result, " result")
+			if result.Email != "" {
 				// If there is no error we save the login details in the cession so that we can authenticate the user during her/his cession period
 				app.Session.Put(r.Context(), "userEmail", result.Email)
-				//app.Session.Put(r.Context(), "userMessage","just_login")
+				app.Session.Put(r.Context(), "userMessage", "just_login")
 				http.Redirect(w, r, "/", 301)
+				return
+			} else {
+				app.InfoLog.Println(err)
+				app.Session.Put(r.Context(), "userMessage", "login_error")
+				//app.Session.Put(r.Context(), "userMessage","just_login")
+				http.Redirect(w, r, "/user/login", 301)
+				return
 			}
+
+		} else {
+			app.InfoLog.Println("error with password or username")
+			app.Session.Put(r.Context(), "userMessage", "login_error")
+			//app.Session.Put(r.Context(), "userMessage","just_login")
+			http.Redirect(w, r, "/user/login", 301)
+			return
 		}
 
 	}
@@ -77,7 +102,7 @@ func RegisterHandler(app *config.Env) http.HandlerFunc {
 		if email != "" {
 			myuser = domain.User{email, name, "", ""}
 			_, err := user.CreateUser(myuser)
-			if err == nil { //when an error occurs when signing up
+			if err != nil { //when an error occurs when signing up
 				app.Session.Put(r.Context(), "userMessage", "sign_up_error")
 				http.Redirect(w, r, "/user/signup", 301)
 				return
