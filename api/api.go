@@ -11,7 +11,7 @@ import (
 *It also set the type of messaging protocol in our case we will be using JSON
 **/
 
-const BASE_URL string = "http://localhost:9099/sts/"
+const BASE_URL string = "http://localhost:9099/sts/" //connection port
 
 func Rest() *resty.Request {
 	return resty.R().SetAuthToken("").
