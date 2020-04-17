@@ -106,11 +106,11 @@ func RegisterHandler(app *config.Env) http.HandlerFunc {
 				app.Session.Put(r.Context(), "userMessage", "sign_up_error")
 				http.Redirect(w, r, "/user/signup", 301)
 				return
+			} else {
+				app.Session.Put(r.Context(), "userMessage", "sign_up_success")
+				http.Redirect(w, r, "/", 301)
+				return
 			}
-		} else {
-			app.Session.Put(r.Context(), "userMessage", "sign_up_success")
-			http.Redirect(w, r, "/", 301)
-			return
 		}
 	}
 }
