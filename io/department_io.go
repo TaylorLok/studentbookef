@@ -1,4 +1,4 @@
-package location
+package io
 
 import (
 	"errors"
@@ -6,11 +6,11 @@ import (
 	"studentbookef/domain"
 )
 
-const locationURL = api.BASE_URL + "location/"
+const departmentURL = api.BASE_URL + "department/"
 
-func CreateLocation(location domain.Location) (domain.Location, error) {
-	entity := domain.Location{}
-	resp, _ := api.Rest().SetBody(location).Post(locationURL + "create")
+func CreateDepartment(department domain.Department) (domain.Department, error) {
+	entity := domain.Department{}
+	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -20,9 +20,9 @@ func CreateLocation(location domain.Location) (domain.Location, error) {
 	}
 	return entity, nil
 }
-func DeleteLocation(location domain.Location) (domain.Location, error) {
-	entity := domain.Location{}
-	resp, _ := api.Rest().Get(locationURL + "delete")
+func DeleteDepartment(department domain.Department) (domain.Department, error) {
+	entity := domain.Department{}
+	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "delete")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -32,9 +32,9 @@ func DeleteLocation(location domain.Location) (domain.Location, error) {
 	}
 	return entity, nil
 }
-func UpdateLocation(location domain.Location) (domain.Location, error) {
-	entity := domain.Location{}
-	resp, _ := api.Rest().Get(locationURL + "update")
+func UpdateDepartment(department domain.Department) (domain.Department, error) {
+	entity := domain.Department{}
+	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -44,9 +44,9 @@ func UpdateLocation(location domain.Location) (domain.Location, error) {
 	}
 	return entity, nil
 }
-func ReadLocation(id string) (domain.Location, error) {
-	entity := domain.Location{}
-	resp, _ := api.Rest().Get(locationURL + "read?id=" + id)
+func ReadDepartment(id string) (domain.Department, error) {
+	entity := domain.Department{}
+	resp, _ := api.Rest().Get(departmentURL + "read?id=" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -56,9 +56,9 @@ func ReadLocation(id string) (domain.Location, error) {
 	}
 	return entity, nil
 }
-func ReadLocations() ([]domain.Location, error) {
-	entity := []domain.Location{}
-	resp, _ := api.Rest().Get(locationURL + "reads")
+func ReadDepartments() ([]domain.Department, error) {
+	entity := []domain.Department{}
+	resp, _ := api.Rest().Get(departmentURL + "reads")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}

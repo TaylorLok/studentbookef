@@ -2,12 +2,17 @@ package home
 
 import (
 	"errors"
+	"fmt"
 	"github.com/go-chi/chi"
 	"html/template"
 	"net/http"
 	"studentbookef/config"
 	"studentbookef/controller/user"
 	"studentbookef/domain"
+	"studentbookef/io"
+	"studentbookef/io/book_io"
+	location2 "studentbookef/io/location"
+	"studentbookef/io/picture_io"
 	user2 "studentbookef/io/user"
 )
 
@@ -39,11 +44,14 @@ func homeHandler(app *config.Env) http.HandlerFunc {
 				app.InfoLog.Println(err)
 			}
 		}
+		// read all the posts deatils and images
+		getBookDetails := getBookDetails()
 		type PageData struct {
-			PageMessage user.Message
-			User        domain.User
+			PageMessage     user.Message
+			User            domain.User
+			BookPostDetails []homePosts
 		}
-		data := PageData{cessionData, myUser}
+		data := PageData{cessionData, myUser, getBookDetails}
 		files := []string{
 			app.Path + "index.html",
 			app.Path + "template/navigator.html",
@@ -59,4 +67,64 @@ func homeHandler(app *config.Env) http.HandlerFunc {
 			app.ErrorLog.Println(err.Error())
 		}
 	}
+}
+
+type homePosts struct {
+	Book       domain.Book
+	Picture    domain.Picture
+	Post       domain.BookPost
+	Location   domain.Location
+	Department domain.Department
+	User       domain.User
+}
+
+func getBookDetails() []homePosts {
+	entity := []homePosts{}
+	image := domain.Picture{}
+	department := domain.Department{}
+
+	// we first check all the posts
+	posts, err := book_io.ReadBookPosts()
+	if err != nil {
+		fmt.Println(err, " there is an error when reading all the bookPosts")
+		return entity
+	}
+	for _, post := range posts {
+		book, err := book_io.ReadBook(post.Id)
+		if err != nil {
+			fmt.Println(err, " there is an error when reading book")
+		}
+		location, err := location2.ReadLocation(post.LocationId)
+		if err != nil {
+			fmt.Println(err, " there is an error when reading all the location")
+		}
+
+		bookImage, err := book_io.ReadBookImage(book.Id)
+		if err != nil {
+			fmt.Println(err, " there is an error when reading all the bookImage")
+		} else {
+			image, err = picture_io.ReadFirstPicture(bookImage.ImageId)
+			if err != nil {
+				fmt.Println(err, " there is an error when reading all the Image")
+			}
+		}
+		user, err := user2.ReadUser(post.Email)
+		if err != nil {
+			fmt.Println(err, " there is an error when reading all the user")
+		}
+		bookdepartment, err := book_io.ReadBookDepartment(book.Id)
+		if err != nil {
+			fmt.Println(err, " there is an error when reading all the bookdepartment")
+		} else {
+			department, err = io.ReadDepartment(bookdepartment.DepartmentId)
+			if err != nil {
+				fmt.Println(err, " there is an error when reading all the bookdepartment")
+			}
+		}
+		fmt.Println(post)
+		newEntity := homePosts{book, image, post, location, department, user}
+		entity = append(entity, newEntity)
+		newEntity = homePosts{}
+	}
+	return entity
 }

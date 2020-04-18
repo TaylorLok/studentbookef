@@ -46,6 +46,13 @@ func GetMessage(Type string) Message {
 	case "post_error_need_to_signup":
 		text := "An error has occurred, Please try to sign in first and again later"
 		return Message{text, "warning"}
+	case "post_empty_error":
+		text := "Please make sure that you have filled in all the required fields"
+		return Message{text, "warning"}
+	case "post_image_error":
+		text := "Please try again uploading light pictures "
+		return Message{text, "warning"}
+
 	}
 	return Message{}
 }

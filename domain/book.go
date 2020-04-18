@@ -8,6 +8,7 @@ type Book struct {
 	Language string  `json:"language"`
 	Edition  string  `json:"edition"`
 	Price    float64 `json:"price"`
+	Author   string  `json:"author"`
 }
 
 type BookDepartment struct {
@@ -23,9 +24,9 @@ type BookImage struct {
 type BookPost struct {
 	Id          string    `json:"id"`
 	Email       string    `json:"email"`
-	BookId      string    `json:"book_Id"`
+	BookId      string    `json:"book_id"`
 	Date        time.Time `json:"date"`
-	LocationId  string    `json:"location_Id"`
+	LocationId  string    `json:"locationId"`
 	Status      string    `json:"status"`
 	Description string    `json:"description"`
 }

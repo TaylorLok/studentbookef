@@ -49,8 +49,19 @@ func DeletePicture(picture domain.Picture) (domain.Picture, error) {
 }
 func ReadPicture(id string) (domain.Picture, error) {
 	entity := domain.Picture{}
-
 	resp, _ := api.Rest().Get(pictureURL + "read?id=" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}
+func ReadFirstPicture(id string) (domain.Picture, error) {
+	entity := domain.Picture{}
+	resp, _ := api.Rest().Get(pictureURL + "readfirst?id=" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -62,7 +73,6 @@ func ReadPicture(id string) (domain.Picture, error) {
 }
 func ReadPictures() ([]domain.Picture, error) {
 	entity := []domain.Picture{}
-
 	resp, _ := api.Rest().Get(pictureURL + "reads")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())

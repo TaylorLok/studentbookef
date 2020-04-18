@@ -56,6 +56,18 @@ func ReadBookPost(id string) (domain.BookPost, error) {
 	}
 	return entity, nil
 }
+func ReadWithBookId(id string) (domain.BookPost, error) {
+	entity := domain.BookPost{}
+	resp, _ := api.Rest().Get(bookPostURL + "readWithbookId?id=" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}
 func ReadBookPosts() ([]domain.BookPost, error) {
 	entity := []domain.BookPost{}
 	resp, _ := api.Rest().Get(bookPostURL + "reads")

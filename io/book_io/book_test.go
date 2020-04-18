@@ -57,7 +57,7 @@ BOOK TEST IMAGE ENDS HERE
 BOOK TEST START HERE
 */
 func TestCreateBook(t *testing.T) {
-	book := domain.Book{"0000", "biblia", "ENglish", "VI", 300}
+	book := domain.Book{"0000", "biblia", "ENglish", "VI", 300, "espooit"}
 	result, err := CreateBook(book)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
@@ -73,13 +73,13 @@ func TestReadBooks(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestDeleteBook(t *testing.T) {
-	book := domain.Book{"BF-ea6a377d-e513-46c2-b4bf-8ab781d4ad41", "biblia", "ENglish", "VI", 300}
+	book := domain.Book{"BF-ea6a377d-e513-46c2-b4bf-8ab781d4ad41", "biblia", "ENglish", "VI", 300, "eps"}
 	result, err := DeleteBook(book)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
 func TestUpdateBook(t *testing.T) {
-	book := domain.Book{"BF-ac451ff2-db92-4a3a-a4ea-f5912554f377", "biblia", "French", "VI", 300}
+	book := domain.Book{"BF-ac451ff2-db92-4a3a-a4ea-f5912554f377", "biblia", "French", "VI", 300, "espoir"}
 	result, err := UpdateBook(book)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
