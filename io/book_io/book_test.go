@@ -27,7 +27,7 @@ func TestCreatBookImage(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestReadBookImage(t *testing.T) {
-	result, err := ReadBookImage("000")
+	result, err := ReadBookImage("0001")
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
 }
@@ -37,7 +37,7 @@ func TestReadBookImages(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 func TestUpdateBookImage(t *testing.T) {
-	bImage := domain.BookImage{"000", "00034", "test"}
+	bImage := domain.BookImage{"0001", "00034", "test"}
 	result, err := UpdateBookImage(bImage)
 	assert.Nil(t, err)
 	fmt.Println("result is: ", result)
