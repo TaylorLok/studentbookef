@@ -6,11 +6,11 @@ import (
 	"studentbookef/domain"
 )
 
-const departmentURL = api.BASE_URL + "department/"
+const locationURL = api.BASE_URL + "loaction/"
 
-func CreateDepartment(department domain.Department)(domain.Department,error) {
-	entity:= domain.Department{}
-	resp,_ := api.Rest().SetBody(department).Post(departmentURL + "create")
+func CreateLocation(location domain.Location)(domain.Location,error)  {
+	entity:= domain.Location{}
+	resp,_ := api.Rest().SetBody(location).Post(locationURL + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -20,10 +20,9 @@ func CreateDepartment(department domain.Department)(domain.Department,error) {
 	}
 	return entity, nil
 }
-
-func ReadDepartment(id string)(domain.Department,error)  {
-	entity := domain.Department{}
-	resp, _ := api.Rest().Get(departmentURL + "read?id=" + id)
+func ReadLocation(id string)(domain.Location,error)  {
+	entity := domain.Location{}
+	resp, _ := api.Rest().Get(locationURL + "read?id=" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -33,10 +32,9 @@ func ReadDepartment(id string)(domain.Department,error)  {
 	}
 	return entity, nil
 }
-
-func UpdateDepartment(department domain.Department)(domain.Department,error)  {
-	entity := domain.Department{}
-	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "update")
+func UpdateLocation(location domain.Location)(domain.Location,error){
+	entity := domain.Location{}
+	resp, _ := api.Rest().SetBody(location).Post(locationURL + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -46,10 +44,9 @@ func UpdateDepartment(department domain.Department)(domain.Department,error)  {
 	}
 	return entity, nil
 }
-
-func DeleteDepartment(department domain.Department)(domain.Department,error)  {
-	entity := domain.Department{}
-	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "delete")
+func DeleteLocation(location domain.Location)(domain.Location,error)  {
+	entity := domain.Location{}
+	resp, _ := api.Rest().SetBody(location).Post(locationURL + "delete")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -59,6 +56,5 @@ func DeleteDepartment(department domain.Department)(domain.Department,error)  {
 	}
 	return entity, nil
 }
-
 
 

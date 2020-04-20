@@ -58,10 +58,11 @@ func GetMessage(Type string) Message {
 }
 
 /****
-When the user press submit button on sign up form this method will excute.
+When the user press submit button on sign up form this method will execute.
 we will collect all the data in the form with r.ParseForm() method now we getting each input by passing the input name(html name).
-we then create a user with only email and name other attributs will remain empty until when the user update his profile.
-if an error occurs we will redirect the url address to /user/signup. this Url will return a sign up page on user's interface with a proper error Message
+we then create a user with only email and name other attributes will remain empty until when the user update his profile.
+if an error occurs we will redirect the url address to /user/signup.
+this Url will return a sign up page on user's interface with a proper error Message
 But if there no errors, we will direct the user on home page with a notification Message for him/her to check the email to confirm registration.
 */
 func LoginPostHandler(app *config.Env) http.HandlerFunc {
