@@ -20,6 +20,18 @@ func CreatBookImage(bookImage domain.BookImage) (domain.BookImage, error) {
 	}
 	return entity, nil
 }
+func ReadBookImageWithBookId(id string) (domain.BookImage, error) {
+	entity := domain.BookImage{}
+	resp, _ := api.Rest().Get(bookImageURL + "readwithbookId?id=" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}
 func ReadBookImage(id string) (domain.BookImage, error) {
 	entity := domain.BookImage{}
 	resp, _ := api.Rest().Get(bookImageURL + "read?id=" + id)

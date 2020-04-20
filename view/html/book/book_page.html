@@ -83,9 +83,9 @@
                                                 data-style="btn-default btn-outline"
                                                 data-menu-style="dropdown-blue">
                                             <option  disabled selected>Select One Language</option>
-                                            {{with .Departement}}
+                                            {{with .Language}}
                                                 {{range .}}
-                                                    <option value={{.Id}}>{{.DepartmentName}}</option>
+                                                    <option value={{.Id}}>{{.Language}}</option>
                                                 {{end}}
                                             {{end}}
                                         </select>

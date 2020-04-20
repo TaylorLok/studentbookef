@@ -3,7 +3,7 @@ package domain
 //import "time"
 
 type Department struct {
-	Book_Id string `json:"id"`
-	Department_Id string `json:"department id"`
-	Description string `json:"description"`
+	Id              string `json:"id"`
+	Department_Name string `json:"department_Name"`
+	Description     string `json:"description"`
 }

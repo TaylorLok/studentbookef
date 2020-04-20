@@ -90,20 +90,23 @@ func getBookDetails() []homePosts {
 		return entity
 	}
 	for _, post := range posts {
-		book, err := book_io.ReadBook(post.Id)
+		book, err := book_io.ReadBook(post.BookId)
 		if err != nil {
 			fmt.Println(err, " there is an error when reading book")
 		}
+
 		location, err := location2.ReadLocation(post.LocationId)
 		if err != nil {
 			fmt.Println(err, " there is an error when reading all the location")
 		}
 
-		bookImage, err := book_io.ReadBookImage(book.Id)
+		bookImage, err := book_io.ReadBookImageWithBookId(book.Id)
 		if err != nil {
 			fmt.Println(err, " there is an error when reading all the bookImage")
 		} else {
+			fmt.Println(bookImage)
 			image, err = picture_io.ReadFirstPicture(bookImage.ImageId)
+			//fmt.Println(image.Id)
 			if err != nil {
 				fmt.Println(err, " there is an error when reading all the Image")
 			}
@@ -121,9 +124,11 @@ func getBookDetails() []homePosts {
 				fmt.Println(err, " there is an error when reading all the bookdepartment")
 			}
 		}
-		fmt.Println(post)
+		//fmt.Println(post.LocationId)
 		newEntity := homePosts{book, image, post, location, department, user}
 		entity = append(entity, newEntity)
+		image = domain.Picture{}
+		department = domain.Department{}
 		newEntity = homePosts{}
 	}
 	return entity
