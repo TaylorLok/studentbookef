@@ -14,6 +14,7 @@ import (
 	"studentbookef/domain"
 	"studentbookef/io"
 	"studentbookef/io/book_io"
+	language2 "studentbookef/io/language"
 	location2 "studentbookef/io/location"
 	"studentbookef/io/picture_io"
 	user2 "studentbookef/io/user"
@@ -48,16 +49,21 @@ func NewPostHandler(app *config.Env) http.HandlerFunc {
 				app.InfoLog.Println(err)
 			}
 		}
-		department, err := book_io.ReadBookDepartments()
+		department, err := io.ReadDepartments()
 		if err != nil {
 			app.InfoLog.Println(err, "  error reading department")
+		}
+		language, err := language2.ReadLanguages()
+		if err != nil {
+			app.InfoLog.Println(err, "  error reading Language")
 		}
 		type PageData struct {
 			PageMessage user.Message
 			User        domain.User
 			Departement []domain.Department
+			Language    []domain.Language
 		}
-		data := PageData{cessionData, myUser, department}
+		data := PageData{cessionData, myUser, department, language}
 		fmt.Println("voila we are in")
 		files := []string{
 			app.Path + "book/book_page.html",
@@ -237,6 +243,8 @@ func PostBookHandler(app *config.Env) http.HandlerFunc {
 		edition := r.PostFormValue("edition")
 		price, _ := strconv.ParseFloat(r.PostFormValue("price"), 64) // converting string into double
 
+		fmt.Println(language, "<<< language")
+
 		//Creating a book first
 		if title != "" && language != "" && author != "" && edition != "" && price != 0.0 {
 			book := domain.Book{"", title, language, edition, price, author}
@@ -274,10 +282,12 @@ func PostBookImage(app *config.Env) http.HandlerFunc {
 		picture := domain.Picture{}
 		r.ParseForm()
 		fmt.Println(" reading the file")
-		department := r.PostFormValue("department")
-		imagedescription := r.PostFormValue("imagedescription")
+
 		file, _, err := r.FormFile("file")
 		file1, _, err := r.FormFile("file1")
+		department := r.PostFormValue("departmentId")
+		imagedescription := r.PostFormValue("imagedescription")
+		fmt.Println("Department: ", department, " and imagedescription: ", imagedescription)
 		fmt.Println(" read successful")
 		if err != nil {
 			fmt.Println(err, "<<<<<<>>>>>>>")
@@ -308,7 +318,7 @@ func PostBookImage(app *config.Env) http.HandlerFunc {
 				return
 			} else { //in case when there is no error when creating a picture, now we will need to create BookImageHandler
 				if bookId != "" {
-					bookImage := domain.BookImage{bookId, picture.Id, imagedescription}
+					bookImage := domain.BookImage{picture.Id, bookId, imagedescription}
 					fmt.Println("bookImage: ", bookImage)
 					newBookImage, err := book_io.CreatBookImage(bookImage)
 					if err != nil { //if could not create a bookImage we rollback

@@ -10,19 +10,16 @@ import (
 func TestCreateDepartment(t *testing.T) {
 	entity := domain.Department{"", "IT", "technic"}
 	result, err := CreateDepartment(entity)
-
 	assert.Nil(t, err)
 	fmt.Println("result :", result)
 }
 func TestReadDepartment(t *testing.T) {
 	result, err := ReadDepartment("DF-f58e0739-cbf4-4f9f-aa02-a69862c71dae")
-
 	assert.Nil(t, err)
 	fmt.Println("result :", result)
 }
 func TestReadDepartments(t *testing.T) {
 	result, err := ReadDepartments()
-
 	assert.Nil(t, err)
 	fmt.Println("result :", result)
 }
