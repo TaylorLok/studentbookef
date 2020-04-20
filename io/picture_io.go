@@ -6,11 +6,11 @@ import (
 	"studentbookef/domain"
 )
 
-const departmentURL = api.BASE_URL + "department/"
+const pictureURL = api.BASE_URL +"picture/"
 
-func CreateDepartment(department domain.Department)(domain.Department,error) {
-	entity:= domain.Department{}
-	resp,_ := api.Rest().SetBody(department).Post(departmentURL + "create")
+func CreatePicture(picture domain.Picture)(domain.Picture,error)  {
+	entity:= domain.Picture{}
+	resp,_ := api.Rest().SetBody(picture).Post(pictureURL + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -21,9 +21,9 @@ func CreateDepartment(department domain.Department)(domain.Department,error) {
 	return entity, nil
 }
 
-func ReadDepartment(id string)(domain.Department,error)  {
-	entity := domain.Department{}
-	resp, _ := api.Rest().Get(departmentURL + "read?id=" + id)
+func ReadPicture(id string)(domain.Picture,error)  {
+	entity := domain.Picture{}
+	resp, _ := api.Rest().Get(locationURL + "read?id=" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -34,9 +34,9 @@ func ReadDepartment(id string)(domain.Department,error)  {
 	return entity, nil
 }
 
-func UpdateDepartment(department domain.Department)(domain.Department,error)  {
-	entity := domain.Department{}
-	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "update")
+func UpdatePicture(picture domain.Picture)(domain.Picture,error)  {
+	entity := domain.Picture{}
+	resp, _ := api.Rest().SetBody(picture).Post(pictureURL + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -47,9 +47,9 @@ func UpdateDepartment(department domain.Department)(domain.Department,error)  {
 	return entity, nil
 }
 
-func DeleteDepartment(department domain.Department)(domain.Department,error)  {
-	entity := domain.Department{}
-	resp, _ := api.Rest().SetBody(department).Post(departmentURL + "delete")
+func DeletePicture(picture domain.Picture)(domain.Picture,error){
+	entity := domain.Picture{}
+	resp, _ := api.Rest().SetBody(picture).Post(pictureURL + "delete")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -59,6 +59,3 @@ func DeleteDepartment(department domain.Department)(domain.Department,error)  {
 	}
 	return entity, nil
 }
-
-
-
