@@ -48,7 +48,7 @@ func NewPostHandler(app *config.Env) http.HandlerFunc {
 				app.InfoLog.Println(err)
 			}
 		}
-		department, err := io.ReadDepartments()
+		department, err := book_io.ReadBookDepartments()
 		if err != nil {
 			app.InfoLog.Println(err, "  error reading department")
 		}
