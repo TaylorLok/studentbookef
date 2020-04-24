@@ -8,11 +8,13 @@ import (
 )
 
 func TestCreateLanguage(t *testing.T) {
-	language := domain.Language{"", "English"}
+	language := domain.Language{"", "French"}
 	result, err := CreateLanguage(language)
 	assert.Nil(t, err)
 	fmt.Println(result)
 }
+
+
 func TestReadLanguage(t *testing.T) {
 	result, err := ReadLanguage("")
 	assert.Nil(t, err)
