@@ -49,6 +49,12 @@ func TestDeleteBookImage(t *testing.T) {
 	fmt.Println("result is: ", result)
 }
 
+func TestReadAllOfBookImage(t *testing.T) {
+	result, err := ReadAllOfBookImage("BF-700d7d99-bcb6-4d35-9429-34862f99a4c2")
+	assert.Nil(t, err)
+	fmt.Println("result is: ", result)
+}
+
 /***
 BOOK TEST IMAGE ENDS HERE
 */

@@ -83,3 +83,15 @@ func ReadPictures() ([]domain.Picture, error) {
 	}
 	return entity, nil
 }
+func ReadAllOf(ids []string) ([]domain.Picture, error) {
+	entity := []domain.Picture{}
+	resp, _ := api.Rest().SetBody(ids).Post(pictureURL + "readAllOf")
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}

@@ -81,3 +81,15 @@ func DeleteBookImage(bookImage domain.BookImage) (domain.BookImage, error) {
 	}
 	return entity, nil
 }
+func ReadAllOfBookImage(id string) ([]domain.BookImage, error) {
+	entity := []domain.BookImage{}
+	resp, _ := api.Rest().Get(bookImageURL + "readAllOf?id=" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}
