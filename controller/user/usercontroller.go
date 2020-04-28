@@ -17,8 +17,8 @@ func User(app *config.Env) http.Handler {
 	r.Get("/login", logInHandler(app))
 	r.Post("/loginpost", LoginPostHandler(app))
 	r.Get("/signup", SignUpHandler(app))
-	r.Post("/register", RegisterHandler(app)) //this method receives signUp form
-	r.Get("/userAccount",userAccountHandler(app)) // done by Taylor
+	r.Post("/register", RegisterHandler(app))      //this method receives signUp form
+	r.Get("/userAccount", userAccountHandler(app)) // done by Taylor
 	return r
 }
 
@@ -56,11 +56,14 @@ func GetMessage(Type string) Message {
 
 	case "userAccount_error": // done by Taylor
 		text := "An error has occurred. please check your input and try again"
-		return Message{text,"warning"}
+		return Message{text, "warning"}
 
 	case "userAccount_successful_added":
 		text := "Thanks for your time, your account was successfully created"
-		return Message{text,"info"}
+		return Message{text, "info"}
+	case "error_reading_book_details":
+		text := "Sorry an error has occurred, please try again"
+		return Message{text, "info"}
 
 	}
 	return Message{}
@@ -196,7 +199,7 @@ func homeHandler(app *config.Env) http.HandlerFunc {
 	}
 }
 
-func userAccountHandler(app *config.Env) http.HandlerFunc {  //done by Taylor
+func userAccountHandler(app *config.Env) http.HandlerFunc { //done by Taylor
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("voila we are in")
 		files := []string{
@@ -215,4 +218,3 @@ func userAccountHandler(app *config.Env) http.HandlerFunc {  //done by Taylor
 		}
 	}
 }
-
