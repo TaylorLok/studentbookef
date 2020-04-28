@@ -18,6 +18,7 @@ func User(app *config.Env) http.Handler {
 	r.Post("/loginpost", LoginPostHandler(app))
 	r.Get("/signup", SignUpHandler(app))
 	r.Post("/register", RegisterHandler(app)) //this method receives signUp form
+	r.Get("/userAccount",userAccountHandler(app)) // done by Taylor
 	return r
 }
 
@@ -52,6 +53,14 @@ func GetMessage(Type string) Message {
 	case "post_image_error":
 		text := "Please try again uploading light pictures "
 		return Message{text, "warning"}
+
+	case "userAccount_error": // done by Taylor
+		text := "An error has occurred. please check your input and try again"
+		return Message{text,"warning"}
+
+	case "userAccount_successful_added":
+		text := "Thanks for your time, your account was successfully created"
+		return Message{text,"info"}
 
 	}
 	return Message{}
@@ -186,3 +195,24 @@ func homeHandler(app *config.Env) http.HandlerFunc {
 		}
 	}
 }
+
+func userAccountHandler(app *config.Env) http.HandlerFunc {  //done by Taylor
+	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("voila we are in")
+		files := []string{
+			app.Path + "user/userAccount.html",
+			app.Path + "template/navigator.html",
+			app.Path + "template/footer.html",
+		}
+		ts, err := template.ParseFiles(files...)
+		if err != nil {
+			app.ErrorLog.Println(err.Error())
+			return
+		}
+		err = ts.Execute(w, nil)
+		if err != nil {
+			app.ErrorLog.Println(err.Error())
+		}
+	}
+}
+
