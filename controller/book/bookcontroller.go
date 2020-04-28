@@ -29,8 +29,39 @@ func Book(app *config.Env) http.Handler {
 	r.Get("/book_Image", BookImageHandler(app))
 	r.Post("/post_book_Image", PostBookImage(app))
 	r.Get("/location", LocationHandler(app))
+	r.Get("/details", DetailsHandler(app))
+
 	//r.Post("/post_book_location",PostBookLocation(app))
 	return r
+}
+
+func DetailsHandler(app *config.Env) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		//we need to check the user if has created an account first
+		//email := app.Session.GetString(r.Context(), "userEmail")
+		//if email == "" {
+		//	app.Session.Put(r.Context(), "userMessage", "post_error_need_to_signup")
+		//	http.Redirect(w, r, "/login", 301)
+		//	return
+		//}
+
+		files := []string{
+			app.Path + "book/book_page.html",
+			app.Path + "template/navigator.html",
+			app.Path + "template/footer.html",
+		}
+		ts, err := template.ParseFiles(files...)
+		if err != nil {
+			app.ErrorLog.Println(err.Error())
+			return
+		}
+		err = ts.Execute(w, nil)
+		if err != nil {
+			app.ErrorLog.Println(err.Error())
+		}
+
+	}
 }
 
 func NewPostHandler(app *config.Env) http.HandlerFunc {

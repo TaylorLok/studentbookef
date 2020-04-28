@@ -104,10 +104,11 @@ func getBookDetails() []homePosts {
 		if err != nil {
 			fmt.Println(err, " there is an error when reading all the bookImage")
 		} else {
-			fmt.Println(bookImage)
 			image, err = picture_io.ReadFirstPicture(bookImage.ImageId)
 			//fmt.Println(image.Id)
 			if err != nil {
+				fmt.Println(bookImage, "<<<<<<<bookImage")
+				fmt.Println(image, "<<<<<<Image")
 				fmt.Println(err, " there is an error when reading all the Image")
 			}
 		}
