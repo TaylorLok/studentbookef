@@ -29,14 +29,88 @@ func Book(app *config.Env) http.Handler {
 	r.Get("/book_Image", BookImageHandler(app))
 	r.Post("/post_book_Image", PostBookImage(app))
 	r.Get("/location", LocationHandler(app))
-	r.Get("/details", DetailsHandler(app))
+	r.Get("/details/{bookId}", DetailsHandler(app))
 
 	//r.Post("/post_book_location",PostBookLocation(app))
 	return r
 }
+func getBookImageArray(bookImages []domain.BookImage) []string {
+	valeus := []string{}
 
+	for _, valeu := range bookImages {
+		valeus = append(valeus, valeu.ImageId)
+	}
+	return valeus
+}
+
+/***
+this method should collect all the information of one book and it two pictures
+*/
 func DetailsHandler(app *config.Env) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		var picture1 string
+		var picture2 string
+		var department domain.Department
+		myUser := domain.User{}
+
+		bookId := chi.URLParam(r, "bookId")
+		if bookId == "" {
+			app.Session.Put(r.Context(), "userMessage", "error_reading_book_details")
+			http.Redirect(w, r, "/", 301)
+			return
+		}
+		bookDepartment, err := book_io.ReadBookDepartment(bookId)
+		if err != nil {
+			app.InfoLog.Println(err, " reading bookDepartment")
+		}
+		if bookDepartment.DepartmentId != "" {
+			department, err = io.ReadDepartment(bookDepartment.DepartmentId)
+			if err != nil {
+				app.InfoLog.Println(err, " reading department")
+			}
+		}
+
+		bookPost, err := book_io.ReadWithBookId(bookId)
+		if err != nil {
+			app.InfoLog.Println(err, " reading bookPost")
+		}
+		book, err := book_io.ReadBook(bookId)
+		if err != nil {
+			app.InfoLog.Println(err, " reading book")
+		}
+
+		bookImage, err := book_io.ReadAllOfBookImage(bookId)
+		if err != nil {
+			app.InfoLog.Println(err)
+		}
+
+		pictures, err := picture_io.ReadAllOf(getBookImageArray(bookImage))
+		if err != nil {
+			app.InfoLog.Println(err, "  reading images")
+		}
+		for index, valeu := range pictures {
+			if index == 0 {
+				picture1 = valeu.Id
+			} else {
+				picture2 = valeu.Id
+			}
+		}
+
+		user, err := user2.ReadUser(bookPost.Email)
+		if err != nil {
+			app.InfoLog.Println(err, " user")
+		}
+		type PageData struct {
+			Book       domain.Book
+			Department domain.Department
+			Post       domain.BookPost
+			Picture1   string
+			Picture2   string
+			User       domain.User
+			BookOwner  domain.User
+		}
+
+		data := PageData{book, department, bookPost, picture1, picture2, myUser, user}
 
 		//we need to check the user if has created an account first
 		//email := app.Session.GetString(r.Context(), "userEmail")
@@ -47,7 +121,7 @@ func DetailsHandler(app *config.Env) http.HandlerFunc {
 		//}
 
 		files := []string{
-			app.Path + "book/book_page.html",
+			app.Path + "book/single-book.html",
 			app.Path + "template/navigator.html",
 			app.Path + "template/footer.html",
 		}
@@ -56,7 +130,7 @@ func DetailsHandler(app *config.Env) http.HandlerFunc {
 			app.ErrorLog.Println(err.Error())
 			return
 		}
-		err = ts.Execute(w, nil)
+		err = ts.Execute(w, data)
 		if err != nil {
 			app.ErrorLog.Println(err.Error())
 		}
