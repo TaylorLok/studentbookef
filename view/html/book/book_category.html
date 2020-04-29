@@ -7,21 +7,21 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" href="../assets/img/fevicon.png" type="image/png" />
+    <link rel="icon" href="../../assets/img/fevicon.png" type="image/png" />
     <title>Eiser ecommerce</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="../assets/vendors/linericon/style.css" />
-    <link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../assets/css/themify-icons.css" />
-    <link rel="stylesheet" href="../assets/vendors/owl-carousel/owl.carousel.min.css" />
-    <link rel="stylesheet" href="../assets/vendors/lightbox/simpleLightbox.css" />
-    <link rel="stylesheet" href="../assets/vendors/nice-select/css/nice-select.css" />
-    <link rel="stylesheet" href="../assets/vendors/animate-css/animate.css" />
-    <link rel="stylesheet" href="../assets/vendors/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/vendors/linericon/style.css" />
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendors/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../../assets/vendors/lightbox/simpleLightbox.css" />
+    <link rel="stylesheet" href="../../assets/vendors/nice-select/css/nice-select.css" />
+    <link rel="stylesheet" href="../../assets/vendors/animate-css/animate.css" />
+    <link rel="stylesheet" href="../../assets/vendors/jquery-ui/jquery-ui.css" />
     <!-- main css -->
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/responsive.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/responsive.css" />
   </head>
 
   <body>
@@ -39,9 +39,8 @@
               <p>Very us move be blessed multiply night</p>
             </div>
             <div class="page_link">
-              <a href="index.html">Home</a>
-              <a href="category.html">Shop</a>
-              <a href="category.html">Women Fashion</a>
+              <a href="/">Home</a>
+              <a href="/book/category">Shop</a>
             </div>
           </div>
         </div>
@@ -81,7 +80,7 @@
                                   {{if .Picture.Id}}
                                     src='data:image/jpeg;base64,{{.Picture.Id}}' alt=""
                                   {{else}}
-                                    src='../assets/img/product/feature-product/f-p-1.jpg'
+                                    src='../../assets/img/product/feature-product/f-p-1.jpg'
                                   {{end}}
                           />
                           <div class="p_icon">
@@ -126,7 +125,7 @@
                     {{with .Departements}}
                     {{range .}}
                     <li>
-                      <a href="/book/get_category/{{.Id}}">{{.Department_Name}}</a>
+                      <a href="#{{.Id}}">{{.Department_Name}}</a>
                     </li>
                    {{end}}
                     {{end}}
@@ -211,20 +210,20 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../assets/js/jquery-3.2.1.min.js"></script>
-    <script src="../assets/js/popper.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/stellar.js"></script>
-    <script src="../assets/vendors/lightbox/simpleLightbox.min.js"></script>
-    <script src="../assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
-    <script src="../assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
-    <script src="../assets/vendors/isotope/isotope-min.js"></script>
-    <script src="../assets/vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="../assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../assets/js/mail-script.js"></script>
-    <script src="../assets/vendors/jquery-ui/jquery-ui.js"></script>
-    <script src="../assets/vendors/counter-up/jquery.waypoints.min.js"></script>
-    <script src="../assets/vendors/counter-up/jquery.counterup.js"></script>
-    <script src="../assets/js/theme.js"></script>
+    <script src="../../assets/js/jquery-3.2.1.min.js"></script>
+    <script src="../../assets/js/popper.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/stellar.js"></script>
+    <script src="../../assets/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="../../assets/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="../../assets/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="../../assets/vendors/isotope/isotope-min.js"></script>
+    <script src="../../assets/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="../../assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../../assets/js/mail-script.js"></script>
+    <script src="../../assets/vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="../../assets/vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../../assets/vendors/counter-up/jquery.counterup.js"></script>
+    <script src="../../assets/js/theme.js"></script>
   </body>
 </html>
