@@ -68,3 +68,15 @@ func UpdateBookDepartment(bookdepartment domain.BookDepartment) (domain.BookDepa
 	}
 	return entity, nil
 }
+func ReadAllOfBookDepartment(id string) ([]domain.BookDepartment, error) {
+	entity := []domain.BookDepartment{}
+	resp, _ := api.Rest().Get(bookDepartmentURL + "readAllOf?id=" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}

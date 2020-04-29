@@ -104,7 +104,12 @@
           </div>
         </div>
       </div>
-
+<!-- this is where is the magic:
+      BookPostDetails is a List of many things(pictures, book deatails....)
+      Here we are going to loop it until it;s reveal everything that it contains.
+      we are first checking  (if .Picture.Id) this means if there is something in .Picture.Id thant  display the picture.
+      remember that to display the picture , i have converted the byte array into String that i saved in Id.
+      -->
       <div class="row">
 {{with .BookPostDetails}}
         {{range .}}
