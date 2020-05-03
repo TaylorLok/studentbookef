@@ -30,3 +30,7 @@ type BookPost struct {
 	Status      string    `json:"status"`
 	Description string    `json:"description"`
 }
+type BookLanguage struct {
+	BookId     string `json:"bookId"`
+	LanguageId string `json:"languageId"`
+}

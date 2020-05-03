@@ -85,8 +85,17 @@
                                         <a class="nav-link" href="contact.html">Contact</a>
                                     </li>
                                         {{if  .User.Name}}
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/book">Post</a>
+                                            <li class="nav-item submenu dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                                   aria-expanded="false">{{.User.Name}}</a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="/book">New Post</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="/book/get_mypost">My Posts</a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                             {{end}}
                                 </ul>
