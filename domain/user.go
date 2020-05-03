@@ -25,3 +25,7 @@ type UserAccount struct {
 	AccountStatus string    `json:"account_status"`
 	Date          time.Time `json:"date"`
 }
+type UserPost struct {
+	PostId string `json:"postId"`
+	Email  string `json:"email"`
+}
