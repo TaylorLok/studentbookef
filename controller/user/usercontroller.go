@@ -215,4 +215,3 @@ func userAccountHandler(app *config.Env) http.HandlerFunc {  //done by Taylor
 		}
 	}
 }
-
