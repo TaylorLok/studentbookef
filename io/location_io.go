@@ -6,11 +6,11 @@ import (
 	"studentbookef/domain"
 )
 
-const locationURL = api.BASE_URL + "loaction/"
+const locationURL = api.BASE_URL + "location/"
 
-func CreateLocation(location domain.Location)(domain.Location,error)  {
-	entity:= domain.Location{}
-	resp,_ := api.Rest().SetBody(location).Post(locationURL + "create")
+func CreateLocation(location domain.Location) (domain.Location, error) {
+	entity := domain.Location{}
+	resp, _ := api.Rest().SetBody(location).Post(locationURL + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -20,7 +20,7 @@ func CreateLocation(location domain.Location)(domain.Location,error)  {
 	}
 	return entity, nil
 }
-func ReadLocation(id string)(domain.Location,error)  {
+func ReadLocation(id string) (domain.Location, error) {
 	entity := domain.Location{}
 	resp, _ := api.Rest().Get(locationURL + "read?id=" + id)
 	if resp.IsError() {
@@ -32,7 +32,7 @@ func ReadLocation(id string)(domain.Location,error)  {
 	}
 	return entity, nil
 }
-func UpdateLocation(location domain.Location)(domain.Location,error){
+func UpdateLocation(location domain.Location) (domain.Location, error) {
 	entity := domain.Location{}
 	resp, _ := api.Rest().SetBody(location).Post(locationURL + "update")
 	if resp.IsError() {
@@ -44,7 +44,7 @@ func UpdateLocation(location domain.Location)(domain.Location,error){
 	}
 	return entity, nil
 }
-func DeleteLocation(location domain.Location)(domain.Location,error)  {
+func DeleteLocation(location domain.Location) (domain.Location, error) {
 	entity := domain.Location{}
 	resp, _ := api.Rest().SetBody(location).Post(locationURL + "delete")
 	if resp.IsError() {
@@ -56,5 +56,3 @@ func DeleteLocation(location domain.Location)(domain.Location,error)  {
 	}
 	return entity, nil
 }
-
-

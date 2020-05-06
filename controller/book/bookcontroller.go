@@ -36,9 +36,96 @@ func Book(app *config.Env) http.Handler {
 	r.Get("/get_mypost", GetPostHandler(app)) //This Method is called when a user want to see all his/her posts.
 	r.Get("/post_edit/{bookId}", EditPostHandler(app))
 	r.Post("/image_update", updatePicture(app))
+	r.Post("/update_book_details", UpdateBookDetaildHandler(app))
 
 	//r.Post("/post_book_location",PostBookLocation(app))
 	return r
+}
+
+func UpdateBookDetaildHandler(app *config.Env) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		email := app.Session.GetString(r.Context(), "userEmail")
+		if email == "" {
+			app.Session.Put(r.Context(), "userMessage", "post_error_need_to_signup")
+			http.Redirect(w, r, "/user/login", 301)
+			return
+		}
+
+		//Collecting data from HTML
+
+		r.ParseForm()
+		bookId := r.PostFormValue("bookId")
+		bookName := r.PostFormValue("bookName")
+		edition := r.PostFormValue("edition")
+		//datestr := r.PostFormValue("date")
+		//dateTime, _ := time.Parse(misc.YYYMMDDTIME_FORMAT, datestr)
+		price, _ := strconv.ParseFloat(r.PostFormValue("price"), 64)
+		author := r.PostFormValue("author")
+		department := r.PostFormValue("department")
+		language := r.PostFormValue("language")
+		post_description := r.PostFormValue("post_description")
+		postId := r.PostFormValue("postId")
+		locationId := r.PostFormValue("locationId")
+		location_title := r.PostFormValue("location_title")
+		location_description := r.PostFormValue("location_description")
+
+		//app.ErrorLog.Println(dateTime, " date")
+
+		if bookId != "" && bookName != "" && language != "" && edition != "" && author != "" {
+			fmt.Println(language)
+			book := domain.Book{bookId, bookName, language, edition, price, author}
+			_, err := book_io.UpdateBook(book)
+			if err != nil {
+				app.ErrorLog.Println(err, "  error updating book")
+			}
+		}
+
+		/****
+		Dealing with BookPost update
+		*/
+		if postId != "" && bookId != "" && locationId != "" && post_description != "" {
+			fmt.Println(postId)
+			oldPost, err := book_io.ReadBookPost(postId)
+			if err != nil {
+				app.ErrorLog.Println(err, " error reading post")
+			} else {
+				post := domain.BookPost{postId, email, bookId, oldPost.Date, locationId, oldPost.Status, post_description}
+				_, err := book_io.UpdateBookPost(post)
+				if err != nil {
+					app.ErrorLog.Println(err, "error creating BookPost")
+				}
+			}
+			/****
+			Dealing with Book department update
+			*/
+			if department != "" && bookId != "" {
+				bookdepartment := domain.BookDepartment{bookId, department, ""}
+				_, err := book_io.UpdateBookDepartment(bookdepartment)
+				if err != nil {
+					app.ErrorLog.Println(err, "error creating BookDepartment")
+				}
+			}
+			/*****
+			Dealing with Location update
+			*/
+			if location_description != "" && locationId != "" && location_title != "" {
+				location := domain.Location{locationId, location_title, "", "", location_description}
+
+				fmt.Println(location)
+				_, err := io.UpdateLocation(location)
+				if err != nil {
+					app.ErrorLog.Println(err, "error creating Location")
+				}
+			}
+		}
+		// if all go well
+		fmt.Println("bookImage creation Successful: ")
+		app.Session.Put(r.Context(), "userMessage", "update_successful")
+		http.Redirect(w, r, "/book/post_edit/"+bookId, 301)
+		return
+
+	}
+
 }
 
 func updatePicture(app *config.Env) http.HandlerFunc {
@@ -130,7 +217,7 @@ func EditPostHandler(app *config.Env) http.HandlerFunc {
 			Here I HAVE TRIED TO REPLACE LOCATIONID FIELD WITH FORMATTED TIME IN STRING TO ALLOW HTML TO READ TIME PROPERLY
 			*/
 			bookPostObject = domain.BookPost{bookPost.Id, bookPost.Email, bookPost.BookId, bookPost.Date, misc.FormatDateTime(bookPost.Date), bookPost.Description, bookPost.Description}
-			fmt.Println(bookPostObject.LocationId, "<<<<<<Time")
+			//fmt.Println(bookPostObject.LocationId, "<<<<<<Time")
 		}
 		book, err := book_io.ReadBook(bookId)
 		if err != nil {
