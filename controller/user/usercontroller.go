@@ -84,6 +84,21 @@ func GetMessage(Type string) Message {
 		text :="Something went wrong please check your spelling"
 		return Message{text,"info"}
 
+		return Message{text, "info"}
+	case "error_reading_book_details":
+		text := "Sorry an error has occurred, please try again"
+		return Message{text, "info"}
+	case "login_error_missing":
+		text := "Please login before checking your posts"
+		return Message{text, "info"}
+	case "error_update_image": //this error should be reported on edit post page
+		text := "We are sorry an error has occurred while updating the picture. It may be due to the size of your picture"
+		return Message{text, "warning"}
+	case "update_successful": //this error should be reported on edit post page
+		text := "Successful update of your book picture"
+		return Message{text, "warning"}
+
+
 	}
      return Message{}
 }
