@@ -73,6 +73,9 @@ func GetMessage(Type string) Message {
 	case "update_successful": //this error should be reported on edit post page
 		text := "Successful update of your book picture"
 		return Message{text, "warning"}
+	case "delete_successful": //this error should be reported on user_post page
+		text := "Successful delete of your book post picture"
+		return Message{text, "info"}
 
 	}
 	return Message{}

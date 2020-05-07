@@ -22,7 +22,7 @@ func CreateLocation(location domain.Location) (domain.Location, error) {
 }
 func DeleteLocation(location domain.Location) (domain.Location, error) {
 	entity := domain.Location{}
-	resp, _ := api.Rest().Get(locationURL + "delete")
+	resp, _ := api.Rest().SetBody(location).Post(locationURL + "delete")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
