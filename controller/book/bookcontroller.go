@@ -31,6 +31,7 @@ func Book(app *config.Env) http.Handler {
 	r.Post("/post_book_Image", PostBookImage(app))
 	r.Get("/location", LocationHandler(app))
 	r.Get("/details/{bookId}", DetailsHandler(app))
+<<<<<<< HEAD
 	r.Get("/category", CategoryHandler(app))
 	r.Get("/get_category/{departmentId}", GetCategoryHandler(app))
 	r.Get("/get_mypost", GetPostHandler(app)) //This Method is called when a user want to see all his/her posts.
@@ -38,11 +39,16 @@ func Book(app *config.Env) http.Handler {
 	r.Post("/image_update", updatePicture(app))
 	r.Post("/update_book_details", UpdateBookDetaildHandler(app))
 	r.Post("/delete", DeleteBookHandler(app))
+=======
+>>>>>>> done with viewing book single page
 
 	//r.Post("/post_book_location",PostBookLocation(app))
 	return r
 }
+func getBookImageArray(bookImages []domain.BookImage) []string {
+	valeus := []string{}
 
+<<<<<<< HEAD
 func DeleteBookHandler(app *config.Env) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
@@ -563,6 +569,8 @@ func CategoryHandler(app *config.Env) http.HandlerFunc {
 func getBookImageArray(bookImages []domain.BookImage) []string {
 	valeus := []string{}
 
+=======
+>>>>>>> done with viewing book single page
 	for _, valeu := range bookImages {
 		valeus = append(valeus, valeu.ImageId)
 	}
@@ -578,6 +586,7 @@ func DetailsHandler(app *config.Env) http.HandlerFunc {
 		var picture2 string
 		var department domain.Department
 		myUser := domain.User{}
+<<<<<<< HEAD
 		email := app.Session.GetString(r.Context(), "userEmail") //We are checking of the user has login?
 		if email != "" {
 			err := errors.New("")
@@ -586,6 +595,8 @@ func DetailsHandler(app *config.Env) http.HandlerFunc {
 				app.InfoLog.Println(err)
 			}
 		}
+=======
+>>>>>>> done with viewing book single page
 
 		bookId := chi.URLParam(r, "bookId")
 		if bookId == "" {
@@ -629,10 +640,13 @@ func DetailsHandler(app *config.Env) http.HandlerFunc {
 				picture2 = valeu.Id
 			}
 		}
+<<<<<<< HEAD
 		location, err := location2.ReadLocation(bookPost.LocationId)
 		if err != nil {
 			app.InfoLog.Println(err, " Location")
 		}
+=======
+>>>>>>> done with viewing book single page
 
 		user, err := user2.ReadUser(bookPost.Email)
 		if err != nil {
@@ -646,10 +660,16 @@ func DetailsHandler(app *config.Env) http.HandlerFunc {
 			Picture2   string
 			User       domain.User
 			BookOwner  domain.User
+<<<<<<< HEAD
 			Location   domain.Location
 		}
 
 		data := PageData{book, department, bookPost, picture1, picture2, myUser, user, location}
+=======
+		}
+
+		data := PageData{book, department, bookPost, picture1, picture2, myUser, user}
+>>>>>>> done with viewing book single page
 
 		//we need to check the user if has created an account first
 		//email := app.Session.GetString(r.Context(), "userEmail")

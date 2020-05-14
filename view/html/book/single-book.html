@@ -113,13 +113,21 @@
                 {{if .Book.Author}}
                 <li>
                   <a  href="#">
+<<<<<<< HEAD
                     <span>Author</span> : {{.Book.Author}}</a>
+=======
+                    <span>Department</span> : {{.Department.Department_Name}}</a>
+>>>>>>> done with viewing book single page
                 </li>
                 {{end}}
                 {{if .Department.Department_Name}}
                 <li>
                   <a  href="#">
+<<<<<<< HEAD
                     <span>Book Department</span> : {{.Department.Department_Name}}</a>
+=======
+                    <span>Department</span> : {{.Department.Department_Name}}</a>
+>>>>>>> done with viewing book single page
                 </li>
                 {{end}}
                 <li>
@@ -154,6 +162,7 @@
                 {{.Post.Description}}
                 {{end}}
               </p>
+<<<<<<< HEAD
               <hr class="my-4">
               <h3>Location</h3>
               {{if .Location.Title}}
@@ -165,6 +174,34 @@
               </p>
               {{end}}
 
+=======
+              <div class="product_count">
+                <label for="qty">Quantity:</label>
+                <input
+                  type="text"
+                  name="qty"
+                  id="sst"
+                  maxlength="12"
+                  value="1"
+                  title="Quantity:"
+                  class="input-text qty"
+                />
+                <button
+                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                  class="increase items-count"
+                  type="button"
+                >
+                  <i class="lnr lnr-chevron-up"></i>
+                </button>
+                <button
+                  onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                  class="reduced items-count"
+                  type="button"
+                >
+                  <i class="lnr lnr-chevron-down"></i>
+                </button>
+              </div>
+>>>>>>> done with viewing book single page
               <div class="card_area">
                 <a class="main_btn" href="#">Add to Cart</a>
                 <a class="icon_btn" href="#">
@@ -197,7 +234,22 @@
               >Description</a
             >
           </li>
+<<<<<<< HEAD
 
+=======
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              id="profile-tab"
+              data-toggle="tab"
+              href="#profile"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+              >Specification</a
+            >
+          </li>
+>>>>>>> done with viewing book single page
           <li class="nav-item">
             <a
               class="nav-link"
@@ -210,6 +262,21 @@
               >Comments</a
             >
           </li>
+<<<<<<< HEAD
+=======
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              id="review-tab"
+              data-toggle="tab"
+              href="#review"
+              role="tab"
+              aria-controls="review"
+              aria-selected="false"
+              >Reviews</a
+            >
+          </li>
+>>>>>>> done with viewing book single page
         </ul>
         <div class="tab-content" id="myTabContent">
           <div
