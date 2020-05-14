@@ -61,6 +61,8 @@ func GetMessage(Type string) Message {
 	case "userAccount_successful_added":
 		text := "Thanks for your time, your account was successfully created"
 		return Message{text, "info"}
+
+		return Message{text, "info"}
 	case "error_reading_book_details":
 		text := "Sorry an error has occurred, please try again"
 		return Message{text, "info"}
@@ -73,9 +75,6 @@ func GetMessage(Type string) Message {
 	case "update_successful": //this error should be reported on edit post page
 		text := "Successful update of your book picture"
 		return Message{text, "warning"}
-	case "delete_successful": //this error should be reported on user_post page
-		text := "Successful delete of your book post picture"
-		return Message{text, "info"}
 
 	}
 	return Message{}
