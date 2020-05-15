@@ -150,7 +150,7 @@
 
                                 <li class="nav-item">
 
-                                    <a href="/user/signup" class="icons" title="User Account">
+                                    <a href="/user/profile" class="icons" title="User Profile">
                                         <i class="ti-user" aria-hidden="False"></i> <!--================ i changed to true in this Area =================-->
                                     </a>
 
@@ -199,32 +199,42 @@
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Create an Account</h5>
-                    <form class="form-signin" method="post" action="/user/register">
+                    <h5 class="card-title text-center">Create a User Profile</h5>
+                    <form class="form-signin" method="post" action="/user/profile">
 
                         <div class="form-label-group">
-                            <input type="text" id="inputName" name="name"  class="form-control" placeholder="Full Name" required autofocus>
-                            <label for="inputPassword">Full Name</label>
+                            <input type="text" id="inputName" name="name"  class="form-control" placeholder="Name" required autofocus>
+                            <label for="inputName"></label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="inputSurname" name="Surname"  class="form-control" placeholder="Surname" required autofocus>
+                            <label for="inputSurname"></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="text" id="inputEmail" name="email"  class="form-control" placeholder="Email address" required autofocus>
-                            <label for="inputEmail">Email Address</label>
+                            <label for="inputEmail"></label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="inputTel" name="telephone"  class="form-control" placeholder="Telephone Number" required autofocus>
+                            <label for="inputTel"></label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="text" id="inputPassword" name="password"  class="form-control" placeholder="Password" required autofocus>
-                            <label for="inputPassword">Password</label>
+                            <label for="inputPassword"></label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="date" id="date" name="date"  class="form-control" placeholder="DD-MM-YYYY" required autofocus>
-                            <label for="inputDate">Date </label>
+                            <input type="text" id="inputConfirmPassword" name="Confirm-password"  class="form-control" placeholder="Confirm-Password" required autofocus>
+                            <label for="inputConfirmPassword"></label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create User Account </button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create Your Profile </button>
                         <hr class="my-4">
-                        <p>Welcome and thanks for joining us!your account has been created</p>
+                        <p>Welcome and thanks for joining us!your profile has been created</p>
                     </form>
                 </div>
             </div>
