@@ -19,6 +19,7 @@ func User(app *config.Env) http.Handler {
 	r.Get("/signup", SignUpHandler(app))
 	r.Post("/register", RegisterHandler(app))      //this method receives signUp form
 	r.Get("/userAccount", userAccountHandler(app)) // done by Taylor
+	r.Get("/userprofile",userprofileHandler(app))
 	return r
 }
 
@@ -76,8 +77,15 @@ func GetMessage(Type string) Message {
 		text := "Successful update of your book picture"
 		return Message{text, "warning"}
 
+	case "user_profile_successful_created": // added by taylor for User profile successfully created
+		text := "Your profile is successful created"
+		return Message{text, "info"}
+	case "userprofile_error":
+		text :="Something went wrong please check your spelling"
+		return Message{text,"info"}
+
 	}
-	return Message{}
+     return Message{}
 }
 
 /****
@@ -229,3 +237,27 @@ func userAccountHandler(app *config.Env) http.HandlerFunc { //done by Taylor
 		}
 	}
 }
+
+
+func userprofileHandler(app *config.Env) http.HandlerFunc { //done by Taylor for user profile created
+	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("voila we are in")
+		files := []string{
+			app.Path + "user/user_profile.html",
+			app.Path + "template/navigator.html",
+			app.Path + "template/footer.html",
+		}
+		ts, err := template.ParseFiles(files...)
+		if err != nil {
+			app.ErrorLog.Println(err.Error())
+			return
+		}
+		err = ts.Execute(w, nil)
+		if err != nil {
+			app.ErrorLog.Println(err.Error())
+		}
+	}
+}
+
+
+
