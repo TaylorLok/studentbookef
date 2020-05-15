@@ -19,7 +19,7 @@ func User(app *config.Env) http.Handler {
 	r.Get("/signup", SignUpHandler(app))
 	r.Post("/register", RegisterHandler(app))      //this method receives signUp form
 	r.Get("/userAccount", userAccountHandler(app)) // done by Taylor
-	r.Get("/userprofile",userprofileHandler(app))
+	r.Get("/userprofile", userprofileHandler(app))
 	return r
 }
 
@@ -73,7 +73,7 @@ func GetMessage(Type string) Message {
 	case "error_update_image": //this error should be reported on edit post page
 		text := "We are sorry an error has occurred while updating the picture. It may be due to the size of your picture"
 		return Message{text, "warning"}
-	case "update_successful": //this error should be reported on edit post page
+	case "update_successfully": //this error should be reported on edit post page
 		text := "Successful update of your book picture"
 		return Message{text, "warning"}
 
@@ -81,26 +81,25 @@ func GetMessage(Type string) Message {
 		text := "Your profile is successful created"
 		return Message{text, "info"}
 	case "userprofile_error":
-		text :="Something went wrong please check your spelling"
-		return Message{text,"info"}
+		text := "Something went wrong please check your spelling"
+		return Message{text, "info"}
 
 		return Message{text, "info"}
-	case "error_reading_book_details":
+	case "error_reading_book_details on the page":
 		text := "Sorry an error has occurred, please try again"
 		return Message{text, "info"}
-	case "login_error_missing":
+	case "login_error_missing message":
 		text := "Please login before checking your posts"
 		return Message{text, "info"}
-	case "error_update_image": //this error should be reported on edit post page
+	case "error_update_image for post": //this error should be reported on edit post page
 		text := "We are sorry an error has occurred while updating the picture. It may be due to the size of your picture"
 		return Message{text, "warning"}
 	case "update_successful": //this error should be reported on edit post page
 		text := "Successful update of your book picture"
 		return Message{text, "warning"}
 
-
 	}
-     return Message{}
+	return Message{}
 }
 
 /****
@@ -253,7 +252,6 @@ func userAccountHandler(app *config.Env) http.HandlerFunc { //done by Taylor
 	}
 }
 
-
 func userprofileHandler(app *config.Env) http.HandlerFunc { //done by Taylor for user profile created
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("voila we are in")
@@ -273,6 +271,3 @@ func userprofileHandler(app *config.Env) http.HandlerFunc { //done by Taylor for
 		}
 	}
 }
-
-
-
