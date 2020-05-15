@@ -49,7 +49,7 @@ func updatePicture(app *config.Env) http.HandlerFunc {
 		email := app.Session.GetString(r.Context(), "userEmail")
 		if email == "" {
 			app.Session.Put(r.Context(), "userMessage", "post_error_need_to_signup")
-			http.Redirect(w, r, "/login", 301)
+			http.Redirect(w, r, "/user/login", 301)
 			return
 		}
 		fmt.Println("voila we are in picture update process")
