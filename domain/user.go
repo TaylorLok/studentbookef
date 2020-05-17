@@ -29,11 +29,4 @@ type UserPost struct {
 	PostId string `json:"postId"`
 	Email  string `json:"email"`
 }
-type UserProfile struct {
-	Email           string `json:"email"`
-	Name            string `json:"name"`
-	Surname         string `json:"surname"`
-	PhoneNumber     string `json:"phoneNumber"`
-	Password        string `json:"password"`
-	ConfirmPassword string `json:"confirm-password"`
-}
+
